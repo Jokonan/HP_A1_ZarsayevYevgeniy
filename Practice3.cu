@@ -52,7 +52,7 @@ void cpuHeapSort(std::vector<int>& a) {
 
 // ================= GPU MERGE SORT =================
 
-// Локальная сортировка каждого блока (пузырёк, учебная версия)
+// Локальная сортировка каждого блока 
 global void gpuBlockMergeSort(int* data, int n, int chunkSize) {
     int blockStart = blockIdx.x * chunkSize;
     int blockEnd = imin(blockStart + chunkSize, n);
@@ -68,7 +68,7 @@ global void gpuBlockMergeSort(int* data, int n, int chunkSize) {
     }
 }
 
-// Слияние блоков по парам (учебная версия, один поток на merge)
+// Слияние блоков по парам 
 global void gpuMergePairs(int* data, int n, int step) {
     int tid = blockIdx.x;
     int start = tid * step * 2;
@@ -229,4 +229,5 @@ int main() {
     }
 
     return 0;
+
 }
