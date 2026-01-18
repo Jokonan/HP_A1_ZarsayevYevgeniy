@@ -4,10 +4,10 @@
 #define N 1000000        // размер массива
 #define BLOCK_SIZE 256   // стандартный размер блока потоков
 
-// =======================
+
 // Макрос для проверки ошибок CUDA
 // Если любой CUDA-вызов вернет ошибку, выводим сообщение и завершаем программу
-// =======================
+
 #define CUDA_CHECK(call)                                      \
 do {                                                          \
     cudaError_t err = call;                                   \
@@ -19,22 +19,22 @@ do {                                                          \
     }                                                         \
 } while (0)
 
-// =======================
+
 // Ядро 1: коалесцированный доступ
 // Каждый поток обрабатывает последовательные элементы массива
 // Это пример оптимального доступа к глобальной памяти
-// =======================
+
 __global__ void coalescedAccess(float* arr, float factor, int n) {
     int idx = blockIdx.x * blockDim.x + threadIdx.x; // глобальный индекс потока
     if (idx < n)                                     // проверка границ массива
         arr[idx] *= factor;                           // умножаем элемент массива
 }
 
-// =======================
+
 // Ядро 2: некоалесцированный доступ
 // Каждый поток обрабатывает элементы через "скачки"
 // Чтобы показать эффект неэффективного доступа к глобальной памяти
-// =======================
+
 __global__ void nonCoalescedAccess(float* arr, float factor, int n) {
     int tid = threadIdx.x;               // индекс потока внутри блока
     int block_size = blockDim.x;         // размер блока потоков
@@ -50,30 +50,30 @@ int main() {
     float *h_arr = new float[N];  // массив на CPU
     float *d_arr;                 // массив на GPU
 
-    // ------------------------
+
     // Инициализация массива единицами
-    // ------------------------
+
     for (int i = 0; i < N; ++i)
         h_arr[i] = 1.0f;
 
-    // ------------------------
+
     // Выделяем память на GPU и копируем данные
-    // ------------------------
+
     CUDA_CHECK(cudaMalloc(&d_arr, N * sizeof(float))); // выделяем память на GPU
     CUDA_CHECK(cudaMemcpy(d_arr, h_arr, N * sizeof(float), cudaMemcpyHostToDevice)); // копируем данные
 
-    // ------------------------
+
     // Настройка сетки и блоков потоков
-    // ------------------------
+
     dim3 block(BLOCK_SIZE);                       // блок из 256 потоков
     dim3 grid((N + BLOCK_SIZE - 1) / BLOCK_SIZE); // количество блоков для покрытия всего массива
 
     cudaEvent_t start, stop;  // таймеры для измерения времени выполнения
     float elapsed;            // переменная для хранения времени
 
-    // =======================
+
     // Коалесцированный доступ
-    // =======================
+
     CUDA_CHECK(cudaEventCreate(&start));
     CUDA_CHECK(cudaEventCreate(&stop));
     CUDA_CHECK(cudaEventRecord(start));  // старт таймера
@@ -90,9 +90,9 @@ int main() {
     std::cout << "Coalesced access sample: " << h_arr[0]
               << " | Time: " << elapsed << " ms" << std::endl;
 
-    // =======================
+
     // Некоалесцированный доступ
-    // =======================
+
     // Сбрасываем массив на 1.0 перед запуском второго ядра
     for (int i = 0; i < N; ++i) h_arr[i] = 1.0f;
     CUDA_CHECK(cudaMemcpy(d_arr, h_arr, N * sizeof(float), cudaMemcpyHostToDevice));
@@ -110,9 +110,9 @@ int main() {
     std::cout << "Non-coalesced access sample: " << h_arr[0]
               << " | Time: " << elapsed << " ms" << std::endl;
 
-    // ------------------------
+
     // Освобождаем память на GPU и CPU
-    // ------------------------
+
     CUDA_CHECK(cudaFree(d_arr));
     delete[] h_arr;
 
