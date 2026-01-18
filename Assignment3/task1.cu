@@ -4,10 +4,10 @@
 #define N 1000000        // размер массива
 #define BLOCK_SIZE 256   // количество потоков в одном блоке
 
-// =======================
+
 // Макрос для проверки ошибок CUDA
 // Если CUDA вызов возвращает ошибку, выводим сообщение и прекращаем выполнение
-// =======================
+
 #define CUDA_CHECK(call)                                      \
 do {                                                          \
     cudaError_t err = call;                                   \
@@ -19,21 +19,21 @@ do {                                                          \
     }                                                         \
 } while (0)
 
-// =======================
+
 // Ядро 1: глобальная память
 // Каждый поток обрабатывает один элемент массива напрямую в глобальной памяти
-// =======================
+
 __global__ void multiplyGlobal(float* arr, float factor, int n) {
     int idx = blockIdx.x * blockDim.x + threadIdx.x; // уникальный индекс потока в массиве
     if (idx < n)                                     // проверяем, чтобы не выйти за пределы массива
         arr[idx] *= factor;                          // умножаем элемент на заданный коэффициент
 }
 
-// =======================
+
 // Ядро 2: shared память
 // Используем быструю память блока для временного хранения элементов
 // Это ускоряет доступ к данным по сравнению с глобальной памятью
-// =======================
+
 __global__ void multiplyShared(float* arr, float factor, int n) {
     __shared__ float temp[BLOCK_SIZE];               // выделяем shared память на блок
 
@@ -81,9 +81,9 @@ int main() {
     cudaEvent_t start, stop;    // таймеры для измерения времени работы ядра
     float timeGlobal, timeShared;
 
-    // =======================
+
     // Версия 1: глобальная память
-    // =======================
+   
     CUDA_CHECK(cudaEventCreate(&start));
     CUDA_CHECK(cudaEventCreate(&stop));
     CUDA_CHECK(cudaEventRecord(start));           // стартуем таймер
@@ -101,9 +101,9 @@ int main() {
     std::cout << "Global memory result sample: " << h_arr[0] << std::endl;
     std::cout << "Time (global memory): " << timeGlobal << " ms" << std::endl;
 
-    // =======================
+
     // Версия 2: shared память
-    // =======================
+
     // Сброс массива на CPU на 1.0 перед запуском нового ядра
     for (int i = 0; i < N; ++i) h_arr[i] = 1.0f;
     CUDA_CHECK(cudaMemcpy(d_arr, h_arr, N * sizeof(float), cudaMemcpyHostToDevice));
@@ -120,9 +120,9 @@ int main() {
     std::cout << "Shared memory result sample: " << h_arr[0] << std::endl;
     std::cout << "Time (shared memory): " << timeShared << " ms" << std::endl;
 
-    // ------------------------
+
     // Освобождаем память на GPU и CPU
-    // ------------------------
+
     CUDA_CHECK(cudaFree(d_arr));
     delete[] h_arr;
 
