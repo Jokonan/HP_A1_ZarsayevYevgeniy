@@ -16,9 +16,9 @@ do {                                                          \
     }                                                         \
 } while (0)
 
-// =======================
+
 // Ядро: глобальная память (каждый поток умножает один элемент)
-// =======================
+
 __global__ void multiplyGlobal(float* arr, float factor, int n) {
     int idx = blockIdx.x * blockDim.x + threadIdx.x; // вычисляем уникальный индекс для каждого потока
     if (idx < n)                                     // проверяем, чтобы не выйти за предел массива
@@ -26,9 +26,9 @@ __global__ void multiplyGlobal(float* arr, float factor, int n) {
 }
 
 int main() {
-    // ------------------------
+
     // Создаем массив на CPU
-    // ------------------------
+
     float *h_arr = new float[N]; // основной массив на CPU
     float *d_arr;                // указатель на массив на GPU
 
@@ -36,9 +36,9 @@ int main() {
     for (int i = 0; i < N; ++i)
         h_arr[i] = 1.0f;
 
-    // ------------------------
+
     // Выделяем память на GPU
-    // ------------------------
+
     CUDA_CHECK(cudaMalloc(&d_arr, N * sizeof(float)));
 
     // Копируем данные с CPU на GPU
@@ -48,10 +48,10 @@ int main() {
     cudaEvent_t start, stop;
     float elapsed;  // переменная для хранения времени выполнения
 
-    // =======================
+
     // ВАРИАНТ 1: неоптимальный блок
     // Маленький блок потоков (64) – плохо использует GPU
-    // =======================
+
     int block_bad = 64;
     int grid_bad = (N + block_bad - 1) / block_bad; // вычисляем сколько блоков нужно
 
@@ -74,10 +74,10 @@ int main() {
               << " | Block size: " << block_bad
               << " | Time: " << elapsed << " ms" << std::endl;
 
-    // =======================
+
     // ВАРИАНТ 2: оптимальный блок
     // Блок размером 256 потоков хорошо использует GPU
-    // =======================
+
     // Сброс массива на 1.0
     for (int i = 0; i < N; ++i) h_arr[i] = 1.0f;
     CUDA_CHECK(cudaMemcpy(d_arr, h_arr, N * sizeof(float), cudaMemcpyHostToDevice));
@@ -101,9 +101,9 @@ int main() {
               << " | Block size: " << block_opt
               << " | Time: " << elapsed << " ms" << std::endl;
 
-    // ------------------------
+
     // Освобождаем память на GPU и CPU
-    // ------------------------
+
     CUDA_CHECK(cudaFree(d_arr));
     delete[] h_arr;
 
