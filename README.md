@@ -4,7 +4,7 @@ GoogleDocs ссылка с полным заданием - https://docs.google.c
 (Актуально только для недели 1-5. После все приложения к заданиям находятся в их папках)
 
 ### Сборка
-g++ -std=c++17 -O2 -fopenmp Tasks1-4.cpp -o A1.exe
+g++ -std=c++17 -O2 -fopenmp file_name.cpp -o exec_name.exe
 
 ### Запуск
 .\A1.exe
