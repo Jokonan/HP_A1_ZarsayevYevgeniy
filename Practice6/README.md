@@ -18,6 +18,7 @@
 
 Результаты:
 
+
 <img width="342" height="122" alt="image" src="https://github.com/user-attachments/assets/e989c77d-5bac-44c8-9e4f-bd5035838d92" />
 
 
