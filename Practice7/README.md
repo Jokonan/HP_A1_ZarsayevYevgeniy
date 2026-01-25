@@ -34,9 +34,27 @@
 
 Графики производительности:
 
+Для редукции CPU показывает очень малое время выполнения на всех размерах массивов, так как используется простая последовательная реализация и операция суммирования хорошо оптимизируется. При этом GPU-редукция имеет заметные накладные расходы на запуск ядра, из-за чего на малых массивах она работает медленнее.
+
+Для префиксной суммы ситуация противоположная: с ростом размера массива время CPU-сканирования быстро увеличивается, тогда как GPU-версия показывает почти постоянное время выполнения. Это демонстрирует явное преимущество GPU для алгоритмов с высокой степенью параллелизма на больших объёмах данных.
+
 
 <img width="576" height="455" alt="image" src="https://github.com/user-attachments/assets/ff0c4251-6cc9-42bb-9973-0db88af8838f" />
 
+
+<img width="584" height="455" alt="image" src="https://github.com/user-attachments/assets/9dcf3406-55ca-4fbe-a116-09e4e9da2c3f" />
+
+
+<img width="576" height="455" alt="image" src="https://github.com/user-attachments/assets/f722855f-3829-42af-9d92-7f736dc59c55" />
+
+
+<img width="584" height="455" alt="image" src="https://github.com/user-attachments/assets/d181c48e-6387-4b9f-975d-ce8b406fcbb0" />
+
+
+<img width="584" height="455" alt="image" src="https://github.com/user-attachments/assets/51a744ff-ef51-4478-842c-eabb2004815a" />
+
+
+<img width="584" height="455" alt="image" src="https://github.com/user-attachments/assets/38b40cb7-a0fb-4dcb-8c3c-0a5afc7597f5" />
 
 
 Блок схема:
