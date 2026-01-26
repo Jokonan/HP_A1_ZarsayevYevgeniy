@@ -1,4 +1,9 @@
 
+
+<img width="514" height="544" alt="image" src="https://github.com/user-attachments/assets/70a593ee-23fa-4f1b-9c72-f85df8fb987e" />
+
+
+
 # Контрольные вопросы
 
 
@@ -29,7 +34,8 @@
 
 ### Сборка
 
-!nvcc practice7.cu -O2 -gencode arch=compute_75,code=sm_75 -o practice7
+!nvcc -Xcompiler -fopenmp practice8.cu -o practice8
+
 
 ### Запуск
-!./practice7
+!./practice8
