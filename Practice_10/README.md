@@ -1,4 +1,27 @@
 
+
+
+## Task1
+
+<img width="1185" height="139" alt="image" src="https://github.com/user-attachments/assets/ae511bec-788d-4f30-90cc-6cdbe2c611f2" />
+
+
+## Task2
+
+<img width="416" height="137" alt="image" src="https://github.com/user-attachments/assets/e2ad9151-f1ca-4697-b7dc-766d2bdeec29" />
+
+
+## Task3
+
+<img width="464" height="285" alt="image" src="https://github.com/user-attachments/assets/70b9e4ae-fc87-4e4d-b8e1-4f527bf19123" />
+
+
+## Task4
+
+<img width="592" height="420" alt="image" src="https://github.com/user-attachments/assets/21993c57-8fe3-41c0-a6b5-0b7e4f658d2e" />
+
+
+
 # Контрольные вопросы
 
 
@@ -34,7 +57,20 @@
 
 ### Сборка
 
-!nvcc practice7.cu -O2 -gencode arch=compute_75,code=sm_75 -o practice7
+!g++ -fopenmp task1_openmp.cpp -o task1_openmp
+
+!nvcc task2_cuda.cu -o task2_cuda
+
+!nvcc task3_hybrid.cu -o task3_hybrid
+
+!mpicxx task4_mpi.cpp -o task4_mpi
 
 ### Запуск
-!./practice7
+
+!./task1_openmp
+
+!./task2_cuda
+
+!./task3_hybrid
+
+!mpirun --allow-run-as-root --oversubscribe -np 2 ./task4_mpi
