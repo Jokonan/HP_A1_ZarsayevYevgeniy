@@ -1,26 +1,58 @@
-# Practice10_ZarsayevYevgeniy Отчет еще в работе...
+# Practice10_ZarsayevYevgeniy
 
 ## Отчет по Practice10
 
 
 ## Task1
 
+### Результаты
+
 <img width="1185" height="139" alt="image" src="https://github.com/user-attachments/assets/ae511bec-788d-4f30-90cc-6cdbe2c611f2" />
 
+### Блок-схема
+
+<img width="345" height="764" alt="image" src="https://github.com/user-attachments/assets/bbc01598-baab-4abd-a60a-b16098501122" />
 
 ## Task2
+
+
+### Результаты
+
 
 <img width="416" height="137" alt="image" src="https://github.com/user-attachments/assets/e2ad9151-f1ca-4697-b7dc-766d2bdeec29" />
 
 
+### Блок-схема
+
+<img width="395" height="800" alt="image" src="https://github.com/user-attachments/assets/981ee6ef-c7d1-46fb-bd72-80b4ac32ac2f" />
+
+
 ## Task3
+
+
+### Результаты
+
 
 <img width="464" height="285" alt="image" src="https://github.com/user-attachments/assets/70b9e4ae-fc87-4e4d-b8e1-4f527bf19123" />
 
 
+### Блок-схема
+
+<img width="345" height="802" alt="image" src="https://github.com/user-attachments/assets/83c387b2-5e36-4b8b-81c7-ca2a91a6d593" />
+
+
 ## Task4
 
+
+### Результаты
+
+
 <img width="592" height="420" alt="image" src="https://github.com/user-attachments/assets/21993c57-8fe3-41c0-a6b5-0b7e4f658d2e" />
+
+
+### Блок-схема
+
+<img width="274" height="834" alt="image" src="https://github.com/user-attachments/assets/44d520a3-b176-4e2b-8ce9-aebab15d0e3b" />
 
 
 
